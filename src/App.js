@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { Suspense } from "react";
+import { HashRouter, Switch, Route } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import ResponsiveSidebar from './components/Sidebar/ResponsiveSidebar';
+
+import Home from "./pages/home/Home"
+import SimpleChart from "./pages/simpleChart/SimpleChart"
+import AllCharts from './pages/allCharts/AllCharts';
+
+import {withRouter} from 'react-router-dom'
+
+function App(props) {
+  // console.log(props)
+  let routes = (
+    <HashRouter>
+
+      <Switch>
+        <Route exact path="/" render={(props) => <ResponsiveSidebar Main={Home} props={props} />} />
+        <Route path="/simple-chart" render={(props) => <ResponsiveSidebar Main = {SimpleChart} props = {props} />} />
+        <Route path="/all-charts" render={(props) => <ResponsiveSidebar Main = {AllCharts} props = {props} />} />
+
+      </Switch>
+    </HashRouter>)
+  return <Suspense fallback={<p>Loading ...</p>}>{routes}</Suspense>;
 }
 
-export default App;
+export default withRouter(App);

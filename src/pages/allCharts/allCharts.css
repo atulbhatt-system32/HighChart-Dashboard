@@ -1,0 +1,10 @@
+.options-controllers-container{
+    display: flex;
+    margin: 2rem;
+}
+
+.option-controller{
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+}
